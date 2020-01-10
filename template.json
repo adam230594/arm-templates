@@ -5,9 +5,8 @@
         "sqlServerFirewallRules": {
             "type": "object",
             "metadata": {
-                "description": "Ip addresses to be whitelisted on the sql erver",
-                "environmentVariable": "sqlServerFirewallRules"
-            }            
+                "description": "Ip addresses to be whitelisted on the sql server"                
+            }
         },
         "serverName": {
             "type": "string",
