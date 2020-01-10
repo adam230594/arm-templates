@@ -9,11 +9,10 @@
             "environmentVariable": "sqlServerFirewallRules"
           }
     }
-        "serverName": {
-            "type": "string",
-            "metadata": {
-                "description": "Name of the server to add firewall rules to"
-            }
+    "serverName": {
+        "type": "string",
+        "metadata": {
+            "description": "Name of the server to add firewall rules to"
         }
     },
     "variables": {},
