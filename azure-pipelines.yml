@@ -17,8 +17,8 @@ steps:
         azure\**
       TargetFolder: '$(build.artifactstagingdirectory)/'
       OverWrite: true
-      
-- task: PublishBuildArtifacts@1
-  displayName: 'Publish Artifact'
-  inputs:
-    PathtoPublish: '$(build.artifactstagingdirectory)/'
+
+  - task: PublishBuildArtifacts@1
+    displayName: 'Publish Artifact'
+    inputs:
+      PathtoPublish: '$(build.artifactstagingdirectory)/'
