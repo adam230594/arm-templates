@@ -1,0 +1,37 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "sqlServerFirewallRules": {
+          "type": "object",
+          "metadata": {
+            "description": "Ip addresses to be whitelisted on the sql erver",
+            "environmentVariable": "sqlServerFirewallRules"
+          }
+    }
+        "serverName": {
+            "type": "string",
+            "metadata": {
+                "description": "Name of the server to add firewall rules to"
+            }
+        }
+    },
+    "variables": {},
+    "resources": [
+        {
+            "name": "[concat(parameters('serverName'), '/', parameters('sqlServerFirewallRules')[copyIndex()].Name)]",
+            "type": "Microsoft.Sql/servers/firewallRules",
+            "apiVersion": "2015-05-01-preview",
+            "properties": {
+                "startIpAddress": "[parameters('sqlServerFirewallRules')[copyIndex()].StartIPAddress]",
+                "endIpAddress": "[parameters('sqlServerFirewallRules')[copyIndex()].EndIPAddress]"
+            },
+            "copy": {
+                "count": "[length(parameters('sqlServerFirewallRules'))]",
+                "mode": "Parallel",
+                "name": "firewallRuleCopy"
+            }
+        }
+    ],
+    "outputs": {}
+}
