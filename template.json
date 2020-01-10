@@ -3,11 +3,12 @@
     "contentVersion": "1.0.0.0",
     "parameters": {
         "sqlServerFirewallRules": {
-          "type": "object",
-          "metadata": {
-            "description": "Ip addresses to be whitelisted on the sql erver",
-            "environmentVariable": "sqlServerFirewallRules"
-          },
+            "type": "object",
+            "metadata": {
+                "description": "Ip addresses to be whitelisted on the sql erver",
+                "environmentVariable": "sqlServerFirewallRules"
+            }            
+        },
         "serverName": {
             "type": "string",
             "metadata": {
