@@ -18,19 +18,15 @@
     "variables": {},
     "resources": [
         {
-            "name": "[concat(parameters('serverName'), '/', parameters('sqlServerFirewallRules')[copyIndex()].Name)]",
-            "type": "Microsoft.Sql/servers/firewallRules",
-            "apiVersion": "2015-05-01-preview",
-            "properties": {
-                "startIpAddress": "[parameters('sqlServerFirewallRules')[copyIndex()].StartIPAddress]",
-                "endIpAddress": "[parameters('sqlServerFirewallRules')[copyIndex()].EndIPAddress]"
-            },
-            "copy": {
-                "count": "[length(parameters('sqlServerFirewallRules'))]",
-                "mode": "Parallel",
-                "name": "firewallRuleCopy"
-            }
-        }
+          "type": "Microsoft.Resources/resourceGroups",
+          "apiVersion": "2018-05-01",
+          "location": "[resourceGroup().location]",
+          "name": "[resourceGroup().name]",
+          "tags": {
+            "Note": "subscription level deployment"
+          },
+          "properties": {}
+        },
     ],
     "outputs": {}
 }
