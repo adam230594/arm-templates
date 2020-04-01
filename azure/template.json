@@ -68,7 +68,7 @@
                         "value": "UserAccessAdministrator"
                     },
                     "resourceName": {
-                        "value": "[variables('storageAccountName')]"
+                        "value": "[resourceGroup().name]"
                     }
                 }
             },
