@@ -1,7 +1,8 @@
 {
     "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
     "contentVersion": "1.0.0.0",
-    "parameters": {},
+    "parameters": {
+    },
     "variables": {
         "deploymentUrlBase": "https://raw.githubusercontent.com/SkillsFundingAgency/tl-platform-building-blocks/master/templates/",
         "storageAccountName": "adamrasa"
@@ -26,12 +27,12 @@
         },
         {
             "apiVersion": "2017-05-10",
-            "name": "role-assignments",
+            "name": "storage-role-assignments",
             "type": "Microsoft.Resources/deployments",
             "properties": {
                 "mode": "Incremental",
                 "templateLink": {
-                    "uri": "[concat(variables('deploymentUrlBase'),'role-assignment.json')]",
+                    "uri": "[concat(variables('deploymentUrlBase'),'storage-role-assignment.json')]",
                     "contentVersion": "1.0.0.0"
                 },
                 "parameters": {
@@ -47,8 +48,33 @@
                 }
             },
             "dependsOn": [
+                "user-admin-role-assignments"
             ]
-        }        
+        },
+        {
+            "apiVersion": "2017-05-10",
+            "name": "user-admin-role-assignments",
+            "type": "Microsoft.Resources/deployments",
+            "properties": {
+                "mode": "Incremental",
+                "templateLink": {
+                    "uri": "[concat(variables('deploymentUrlBase'),'user-admin-role-assignment.json')]",
+                    "contentVersion": "1.0.0.0"
+                },
+                "parameters": {
+                    "principalId": {
+                        "value": "94da5bff-2a3b-479e-9d0d-e321b5e6a512"
+                    },
+                    "assignmentType": {
+                        "value": "UserAccessAdministrator"
+                    }
+                }
+            },
+            "dependsOn": [
+                "storage-account"
+            ]
+        }
     ],
-    "outputs": {}
+    "outputs": {
+    }
 }
