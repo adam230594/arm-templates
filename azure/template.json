@@ -1,10 +1,9 @@
 {
     "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
     "contentVersion": "1.0.0.0",
-    "parameters": {
-    },
+    "parameters": {},
     "variables": {
-        "deploymentUrlBase": "https://raw.githubusercontent.com/SkillsFundingAgency/tl-platform-building-blocks/master/templates/",        
+        "deploymentUrlBase": "https://raw.githubusercontent.com/SkillsFundingAgency/tl-platform-building-blocks/master/templates/",
         "storageAccountName": "adamrasa"
     },
     "resources": [
@@ -24,7 +23,7 @@
                     }
                 }
             }
-        },        
+        },
         {
             "apiVersion": "2017-05-10",
             "name": "role-assignments",
@@ -40,15 +39,43 @@
                         "value": "357b1d98-03ae-49da-954b-b466ce9fad89"
                     },
                     "assignmentType": {
-                        "value": "Contributor"
+                        "value": "StorageAccountContributor"
                     },
                     "resourceName": {
                         "value": "[variables('storageAccountName')]"
                     }
                 }
-            }
+            },
+            "dependsOn": [
+                "user-admin"
+            ]
+        },
+        {
+            "apiVersion": "2017-05-10",
+            "name": "user-admin",
+            "type": "Microsoft.Resources/deployments",
+            "properties": {
+                "mode": "Incremental",
+                "templateLink": {
+                    "uri": "[concat(variables('deploymentUrlBase'),'role-assignment.json')]",
+                    "contentVersion": "1.0.0.0"
+                },
+                "parameters": {
+                    "principalId": {
+                        "value": "94da5bff-2a3b-479e-9d0d-e321b5e6a512"
+                    },
+                    "assignmentType": {
+                        "value": "UserAccessAdministrator"
+                    },
+                    "resourceName": {
+                        "value": "[variables('storageAccountName')]"
+                    }
+                }
+            },
+            "dependsOn": [
+                "storage-account"
+            ]
         }
     ],
-    "outputs": {
-    }
+    "outputs": {}
 }
