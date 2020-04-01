@@ -27,7 +27,7 @@
         },        
         {
             "apiVersion": "2017-05-10",
-            "name": "[concat('role-assignments-', copyIndex())]",
+            "name": "role-assignments",
             "type": "Microsoft.Resources/deployments",
             "properties": {
                 "mode": "Incremental",
