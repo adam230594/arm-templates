@@ -48,32 +48,8 @@
                 }
             },
             "dependsOn": [
-                "user-admin-role-assignments"
             ]
-        },
-        {
-            "apiVersion": "2017-05-10",
-            "name": "user-admin-role-assignments",
-            "type": "Microsoft.Resources/deployments",
-            "properties": {
-                "mode": "Incremental",
-                "templateLink": {
-                    "uri": "[concat(variables('deploymentUrlBase'),'user-admin-role-assignment.json')]",
-                    "contentVersion": "1.0.0.0"
-                },
-                "parameters": {
-                    "principalId": {
-                        "value": "94da5bff-2a3b-479e-9d0d-e321b5e6a512"
-                    },
-                    "assignmentType": {
-                        "value": "UserAccessAdministrator"
-                    }
-                }
-            },
-            "dependsOn": [
-                "storage-account"
-            ]
-        }
+        }        
     ],
     "outputs": {
     }
