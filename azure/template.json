@@ -47,35 +47,8 @@
                 }
             },
             "dependsOn": [
-                "user-admin"
             ]
-        },
-        {
-            "apiVersion": "2017-05-10",
-            "name": "user-admin",
-            "type": "Microsoft.Resources/deployments",
-            "properties": {
-                "mode": "Incremental",
-                "templateLink": {
-                    "uri": "[concat(variables('deploymentUrlBase'),'role-assignment.json')]",
-                    "contentVersion": "1.0.0.0"
-                },
-                "parameters": {
-                    "principalId": {
-                        "value": "94da5bff-2a3b-479e-9d0d-e321b5e6a512"
-                    },
-                    "assignmentType": {
-                        "value": "UserAccessAdministrator"
-                    },
-                    "resourceName": {
-                        "value": "[resourceGroup().name]"
-                    }
-                }
-            },
-            "dependsOn": [
-                "storage-account"
-            ]
-        }
+        }        
     ],
     "outputs": {}
 }
