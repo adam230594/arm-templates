@@ -1,32 +1,54 @@
 {
-    "$schema": "https://schema.management.azure.com/schemas/2018-05-01/subscriptionDeploymentTemplate.json#",
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
     "contentVersion": "1.0.0.0",
     "parameters": {
-        "sqlServerFirewallRules": {
-            "type": "array",
-            "metadata": {
-                "description": "Ip addresses to be whitelisted on the sql server"                
-            }
-        },
-        "serverName": {
-            "type": "string",
-            "metadata": {
-                "description": "Name of the server to add firewall rules to"
-            }
-        }
     },
-    "variables": {},
+    "variables": {
+        "deploymentUrlBase": "https://raw.githubusercontent.com/SkillsFundingAgency/tl-platform-building-blocks/master/templates/",        
+        "storageAccountName": "adamrasa"
+    },
     "resources": [
         {
-          "type": "Microsoft.Resources/resourceGroups",
-          "apiVersion": "2018-05-01",
-          "location": "[resourceGroup().location]",
-          "name": "[resourceGroup().name]",
-          "tags": {
-            "Note": "subscription level deployment"
-          },
-          "properties": {}
+            "apiVersion": "2017-05-10",
+            "name": "storage-account",
+            "type": "Microsoft.Resources/deployments",
+            "properties": {
+                "mode": "Incremental",
+                "templateLink": {
+                    "uri": "[concat(variables('deploymentUrlBase'), 'storage-account-arm.json')]",
+                    "contentVersion": "1.0.0.0"
+                },
+                "parameters": {
+                    "storageAccountName": {
+                        "value": "[variables('storageAccountName')]"
+                    }
+                }
+            }
+        },        
+        {
+            "apiVersion": "2017-05-10",
+            "name": "[concat('role-assignments-', copyIndex())]",
+            "type": "Microsoft.Resources/deployments",
+            "properties": {
+                "mode": "Incremental",
+                "templateLink": {
+                    "uri": "[concat(variables('deploymentUrlBase'),'role-assignment.json')]",
+                    "contentVersion": "1.0.0.0"
+                },
+                "parameters": {
+                    "principalId": {
+                        "value": "357b1d98-03ae-49da-954b-b466ce9fad89"
+                    },
+                    "assignmentType": {
+                        "value": "Contributor"
+                    },
+                    "resourceName": {
+                        "value": "[variables('storageAccountName')]"
+                    }
+                }
+            }
         }
     ],
-    "outputs": {}
+    "outputs": {
+    }
 }
