@@ -8,15 +8,21 @@
         "serviceBusSku": {
             "type": "string"
         },
-        "serviceBusTopics": {
+        "serviceBusTopicName1": {
+            "type": "string"
+        },
+        "serviceBusTopicName2": {
+            "type": "string"
+        },
+        "serviceBusSubscriptions1": {
             "type": "array"
         },
-        "serviceBusSubscriptions": {
+        "serviceBusSubscriptions2": {
             "type": "array"
         }
     },
     "variables": {
-        "deploymentUrlBase": "https://raw.githubusercontent.com/SkillsFundingAgency/das-platform-building-blocks/service-bus-subscriptions/templates/"        
+        "deploymentUrlBase": "https://raw.githubusercontent.com/SkillsFundingAgency/das-platform-building-blocks/service-bus-subscriptions/templates/"
     },
     "resources": [
         {
@@ -35,16 +41,56 @@
                     },
                     "serviceBusSku": {
                         "value": "[parameters('serviceBusSku')]"
-                    },
-                    "serviceBusTopics": {
-                        "value": "[parameters('serviceBusTopics')]"
-                    },
-                    "serviceBusSubscriptions": {
-                        "value": "[parameters('serviceBusSubscriptions')]"
                     }
                 }
             }
-        }        
+        },
+        {
+            "apiVersion": "2017-05-10",
+            "name": "service-bus-topic",
+            "type": "Microsoft.Resources/deployments",
+            "properties": {
+                "mode": "Incremental",
+                "templateLink": {
+                    "uri": "[concat(variables('deploymentUrlBase'), 'service-bus-topic.json')]",
+                    "contentVersion": "1.0.0.0"
+                },
+                "parameters": {
+                    "serviceBusNamespaceName": {
+                        "value": "[parameters('serviceBusNamespaceName')]"
+                    },
+                    "serviceBusTopicName": {
+                        "value": "[parameters('serviceBusTopicName1')]"
+                    },
+                    "serviceBusSubscriptions": {
+                        "value": "[parameters('serviceBusSubscriptions1')]"
+                    }
+                }
+            }
+        },
+        {
+            "apiVersion": "2017-05-10",
+            "name": "service-bus-topic",
+            "type": "Microsoft.Resources/deployments",
+            "properties": {
+                "mode": "Incremental",
+                "templateLink": {
+                    "uri": "[concat(variables('deploymentUrlBase'), 'service-bus-topic.json')]",
+                    "contentVersion": "1.0.0.0"
+                },
+                "parameters": {
+                    "serviceBusNamespaceName": {
+                        "value": "[parameters('serviceBusNamespaceName')]"
+                    },
+                    "serviceBusTopicName": {
+                        "value": "[parameters('serviceBusTopicName2')]"
+                    },
+                    "serviceBusSubscriptions": {
+                        "value": "[parameters('serviceBusSubscriptions2')]"
+                    }
+                }
+            }
+        }
     ],
     "outputs": {}
 }
