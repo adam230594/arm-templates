@@ -47,7 +47,7 @@
         },
         {
             "apiVersion": "2017-05-10",
-            "name": "service-bus/service-bus-topic1",
+            "name": "service-bus-topic1",
             "type": "Microsoft.Resources/deployments",
             "properties": {
                 "mode": "Incremental",
@@ -73,7 +73,7 @@
         },
         {
             "apiVersion": "2017-05-10",
-            "name": "service-bus/service-bus-topic2",
+            "name": "service-bus-topic2",
             "type": "Microsoft.Resources/deployments",
             "properties": {
                 "mode": "Incremental",
