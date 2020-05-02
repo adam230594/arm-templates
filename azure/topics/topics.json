@@ -78,7 +78,7 @@
             "properties": {
                 "mode": "Incremental",
                 "templateLink": {
-                    "uri": "[concat(variables('deploymentUrlBase'), 'service-bus-topic.json')]",
+                    "uri": "[concat('https://raw.githubusercontent.com/adam230594/arm-templates/master/azure/topics/', 'topic.building.json')]",
                     "contentVersion": "1.0.0.0"
                 },
                 "parameters": {
