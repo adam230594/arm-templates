@@ -43,7 +43,7 @@
             },
             "properties": {},
             "dependsOn": [
-                "[concat(parameters('serviceBusNamespaceName'), '/', parameters('serviceBusTopicName'))]"
+                "[parameters('serviceBusTopicName')]"
             ]
         }
     ],

@@ -15,7 +15,7 @@
             "value": "topictwo"
         },
         "serviceBusSubscriptions1": {
-            "value": []
+            "value": ["subone","subtwo"]
         },
         "serviceBusSubscriptions2": {
             "value": []
