@@ -1,0 +1,24 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "serviceBusNamespaceName": {
+            "value": "adam-1-ns"
+        },
+        "serviceBusSku": {
+            "value": "Standard"
+        },
+        "serviceBusTopicName1": {
+            "value": "topicone"
+        },
+        "serviceBusTopicName2": {
+            "value": "topictwo"
+        },
+        "serviceBusSubscriptions1": {
+            "value": []
+        },
+        "serviceBusSubscriptions2": {
+            "value": []
+        }
+    }
+}
